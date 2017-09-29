@@ -1,7 +1,7 @@
 //your code here
 void setup()
 {
-	//your code here
+	size(700, 700);
 }
 void draw()
 {
@@ -23,4 +23,3 @@ class JumboParticle //uses inheritance
 {
 	//your code here
 }
-

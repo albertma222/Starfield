@@ -1,35 +1,43 @@
-//your code here
+Particle[] god = new Particle[200];
+
 void setup()
 {
-  background(0);
 	size(700, 700);
+  for(int i = 0; i < god.length; i++) {
+    god[i] = new NormalParticle();
+  }
 }
 void draw()
 {
-	//your code here
+  background(0);
+  for(int i = 0; i < god.length; i++) {
+  god[i].move();
+  god[i].show();
+  }
 }
-class NormalParticle
+class NormalParticle implements Particle
 {
   int myColor;
   double myX, myY, myAngle, mySpeed;
   NormalParticle() {
     myX = myY = 350;
+    myAngle = Math.random() * 10 * Math.PI/2;
+    mySpeed = (Math.random() + 0.1) * 5;
   }
   public void move() {
-    myX += Math.cos(myAngle) + mySpeed;
-    myY += Math.sin(myAngle) + mySpeed;
-    myAngle = Math.random() * 10 * Math.PI/2;
-    mySpeed = (Math.random() + 0.1)*10;
+    myX += Math.cos(myAngle) * mySpeed;
+    myY += Math.sin(myAngle) * mySpeed;
   }
   public void show() {
     noStroke();
-    fill((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255));
-    ellipse(0, 0, 10, 10);
+    fill(255);
+    ellipse((float)myX, (float)myY, 10, 10);
   }
 }
 interface Particle
 {
-	//your code here
+	public void move();
+  public void show();
 }
 class OddballParticle //uses an interface
 {

@@ -22,15 +22,18 @@ class NormalParticle implements Particle
   NormalParticle() {
     myX = myY = 350;
     myAngle = Math.random() * 10 * Math.PI/2;
-    mySpeed = (Math.random() + 0.1) * 5;
+    mySpeed = (Math.random() + 0.1) * 10;
   }
   public void move() {
     myX += Math.cos(myAngle) * mySpeed;
     myY += Math.sin(myAngle) * mySpeed;
+    if(myX >= 700 || myX <= 0 || myY >= 700 || myY <= 00) {
+      
+    }
   }
   public void show() {
     noStroke();
-    fill(255);
+    fill(#FFB617);
     ellipse((float)myX, (float)myY, 10, 10);
   }
 }
@@ -43,7 +46,10 @@ class OddballParticle //uses an interface
 {
 	//your code here
 }
-class JumboParticle //uses inheritance
+class JumboParticle extends NormalParticle
 {
-	//your code here
+  JumboParticle() {
+    fill(#E82121);
+	  ellipse((float)myX, (float)myY, 20, 20);
+  }
 }

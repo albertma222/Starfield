@@ -2,14 +2,18 @@ Particle[] god = new Particle[200];
 
 void setup()
 {
-	size(700, 700);
-  for(int i = 0; i < god.length; i++) {
+	size(500, 500);
+  for(int i = 0; i < 9*god.length/10; i++) {
     god[i] = new NormalParticle();
+  }
+  for(int i = 9*god.length/10; i < god.length; i++) {
+    god[i] = new JumboParticle();
   }
 }
 void draw()
 {
-  background(0);
+  fill(0, 0, 0, 20);
+  rect(0, 0, 500, 500, 0);
   for(int i = 0; i < god.length; i++) {
   god[i].move();
   god[i].show();
@@ -20,21 +24,23 @@ class NormalParticle implements Particle
   int myColor;
   double myX, myY, myAngle, mySpeed;
   NormalParticle() {
-    myX = myY = 350;
+    myX = myY = 250;
     myAngle = Math.random() * 10 * Math.PI/2;
-    mySpeed = (Math.random() + 0.1) * 10;
+    mySpeed = (Math.random() + 0.1) * 5;
+    myColor = color(255, (int)(Math.random()*255), 23);
   }
   public void move() {
     myX += Math.cos(myAngle) * mySpeed;
     myY += Math.sin(myAngle) * mySpeed;
-    if(myX >= 700 || myX <= 0 || myY >= 700 || myY <= 00) {
-      
+    if(myX >= 500 || myX <= 0 || myY >= 500 || myY <= 0) {
+      myY = 250;
+      myX = 250;
     }
   }
   public void show() {
     noStroke();
-    fill(#FFB617);
-    ellipse((float)myX, (float)myY, 10, 10);
+    fill(255);
+    ellipse((float)myX, (float)myY, 5, 5);
   }
 }
 interface Particle
@@ -42,14 +48,20 @@ interface Particle
 	public void move();
   public void show();
 }
-class OddballParticle //uses an interface
+class OddballParticle
 {
-	//your code here
+	int myX, myY;
+  OddballParticle() {
+  }
+  public void move() {
+  }
+  public void show() {
+  }
 }
 class JumboParticle extends NormalParticle
 {
-  JumboParticle() {
-    fill(#E82121);
-	  ellipse((float)myX, (float)myY, 20, 20);
+  public void show() {
+    fill(myColor);
+    ellipse((float)myX, (float)myY, 10, 10);
   }
 }
